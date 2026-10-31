@@ -1,0 +1,30 @@
+# __APP__ 0.1.0
+
+Primeira versão de desenvolvimento do __APP__.
+
+## Destaques
+
+- [PREENCHER]
+
+## Validado
+
+- [PREENCHER: TUI em terminais reais]
+- [PREENCHER: console em VT real, resolução e bpp]
+
+## Limitações
+
+- `--backend auto` usa TUI; o framebuffer é sempre explícito.
+- Sem DRM/KMS nesta versão.
+- 24/16 bpp podem estar pendentes de validação em hardware.
+- Sem vsync: tearing leve é aceitável.
+
+## Instalação
+
+```bash
+tar -xzf __BIN__-0.1.0-x86_64-unknown-linux-gnu.tar.gz
+cd __BIN__-0.1.0-x86_64-unknown-linux-gnu
+./install.sh --prefix "$HOME/.local"
+```
+
+> Não inclua o hash do próprio pacote nestas notas: ele muda quando as notas
+> mudam. Registre o hash no `AGENTS.md` e na página da release.

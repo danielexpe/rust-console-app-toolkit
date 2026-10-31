@@ -1,0 +1,18 @@
+# Créditos
+
+## __APP__
+
+- Código: __APP__ contributors (MIT).
+- Arte original: __APP__ contributors (CC BY 4.0).
+- Design, regras e textos: __APP__ contributors.
+
+## Fontes
+
+| Fonte | Autor | Licença |
+| --- | --- | --- |
+| [PREENCHER] | [PREENCHER] | OFL 1.1 |
+
+## Crates
+
+A lista completa de dependências e licenças está em
+`THIRD_PARTY_NOTICES.md` e `Cargo.lock`.

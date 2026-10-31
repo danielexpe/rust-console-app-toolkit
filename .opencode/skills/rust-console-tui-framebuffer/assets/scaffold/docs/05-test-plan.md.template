@@ -1,0 +1,57 @@
+# 05 — Plano de testes
+
+## 1. Pirâmide
+
+1. **Unitários de domínio** — regras, modelos, transições, RNG, placar.
+2. **Propriedades/invariantes** — estados impossíveis, somas, simetria, limites.
+3. **Snapshots de TUI** — texto por tela/idioma/breakpoint.
+4. **Integração/PTY** — entrada real, resize, saída limpa.
+5. **Sem hardware** — formatos fb, ABI, conversão, geometria, blend.
+6. **Manual em hardware** — TUI em terminais reais e fb no VT.
+
+## 2. Testes por área
+
+| Área | Casos |
+| --- | --- |
+| Domínio | [PREENCHER] |
+| Transições | [PREENCHER] |
+| RNG/seed | [PREENCHER] |
+| CLI | defaults, todos os flags, combinações inválidas |
+| TUI | snapshots por tela/idioma/breakpoint |
+| Captura | 1344 × 756, determinística, não vazia |
+| fb sem hardware | 32/24/16 bpp, ABI 160/80, stride, pan, fallback |
+| Áudio | síntese finita, pico ≤ 1,0, silêncio sem device |
+| Assets | decode e manifesto `--check` |
+
+## 3. Portões
+
+```bash
+cargo fmt --check
+cargo clippy --workspace --all-targets -- -D warnings
+cargo clippy --workspace --all-targets --no-default-features -- -D warnings
+cargo test
+cargo test --no-default-features
+cargo xtask assets --check
+cargo build --release
+cargo build --release --no-default-features
+```
+
+## 4. Matriz manual
+
+- [ ] TUI: terminais principais, 80 × 24 e Wide.
+- [ ] fb: 1920 × 1080, 32 bpp.
+- [ ] fb: 24/16 bpp (ou registrar pendente).
+- [ ] Fluxo completo em todos os modos.
+- [ ] Idiomas, som, pausa, reinício, saída.
+- [ ] Restauração: menu, `Ctrl+C`, SIGTERM, pânico.
+- [ ] VT real: `tty` = `/dev/ttyN`; `fb0/blank` chega a 0 sem `Ctrl+C`.
+- [ ] Console previamente blanked/DPMS off.
+- [ ] Instalador com `PREFIX=/tmp/... SKIP_GROUP=1`.
+
+**Não declare validado o que não foi executado.**
+
+## 5. Validação registrada
+
+| Data | Ambiente | O que foi validado | Pendências |
+| --- | --- | --- | --- |
+| — | — | — | — |

@@ -1,0 +1,61 @@
+# 06 — Roadmap
+
+| Fase | Objetivo | Critério de saída | Estado |
+| --- | --- | --- | --- |
+| 0 — Descoberta | escopo, regras, telas, hardware, licenças | specs aprovadas | em andamento |
+| 1 — Fundação | crate, núcleo puro, i18n, guards, CLI | testes de domínio + TUI placeholder | pendente |
+| 2 — TUI funcional | fluxo principal completo | fluxo completo + snapshots | pendente |
+| 3 — Lógica rica | regras/IA, determinismo | invariantes e `--seed` | pendente |
+| 4 — Arte/som/i18n | assets, pipeline, áudio, acessibilidade | tier de imagem + áudio | pendente |
+| 5 — Release desktop | licenças, docs, medições, pacote | release validado | pendente |
+| 6 — Framebuffer | fbdev, texto, scaling, sinais | console validado + pacote | pendente |
+| 7 — Backlog | DRM/KMS, persistência, temas | priorizado pelo usuário | pendente |
+
+## Checklist por fase
+
+### Fase 0
+
+- [ ] `docs/01`–`08` preenchidos
+- [ ] `AGENTS.md` com decisões congeladas
+- [ ] Hardware alvo confirmado (`/dev/fb0`, resolução, bpp, grupo `video`)
+
+### Fase 1
+
+- [ ] Crate e módulos criados
+- [ ] Domínio puro com testes
+- [ ] CLI com todos os flags
+- [ ] Guardas de terminal
+- [ ] Placeholder TUI
+
+### Fase 2
+
+- [ ] Fluxo principal completo
+- [ ] Snapshots
+- [ ] Breakpoints e resize
+
+### Fase 3
+
+- [ ] Regras/IA completas
+- [ ] Invariantes e `--seed`
+
+### Fase 4
+
+- [ ] Assets originais + pipeline `xtask`
+- [ ] Áudio sintetizado
+- [ ] Acessibilidade e i18n
+
+### Fase 5
+
+- [ ] Portões verdes com e sem features
+- [ ] Licenças e notices
+- [ ] Pacote `tar.gz` + `.sha256`
+- [ ] Smoke em `/tmp`
+
+### Fase 6
+
+- [ ] fbdev aberto/validado
+- [ ] `KD_GRAPHICS` + `FBIOBLANK`
+- [ ] Pan/fallback
+- [ ] Texto e scaling
+- [ ] Sinais e panic hook
+- [ ] Validação em VT real

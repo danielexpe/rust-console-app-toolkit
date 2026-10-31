@@ -1,0 +1,67 @@
+# __APP__
+
+__DESCRIPTION__
+
+Aplicação Rust para console Linux com TUI (`ratatui` + `crossterm`) e backend
+framebuffer fbdev (`/dev/fb0`). Roda offline, sem rede em runtime; assets e
+fontes são embutidos no binário.
+
+> Especificação: `docs/01`–`08`. Memória operacional: `AGENTS.md`.
+> Arquitetura: `framework.md`.
+
+## Requisitos
+
+- Linux x86_64, Rust stable (MSRV 1.88), terminal local para a TUI.
+- Para o console: VT de texto local (`tty` = `/dev/ttyN`), `/dev/fb0` e
+  usuário no grupo `video`.
+
+## Compilar e rodar
+
+```bash
+cargo build --release
+./target/release/__BIN__              # TUI (backend auto)
+./target/release/__BIN__ --backend fb # console via framebuffer
+```
+
+## Instalação
+
+```bash
+./install.sh --prefix "$HOME/.local"
+```
+
+O instalador também adiciona o usuário ao grupo `video` (pode pedir `sudo`).
+Depois de entrar no grupo, saia e entre na sessão ou use `newgrp video`.
+
+## Controles
+
+[PREENCHER: teclas do fluxo principal, atalhos globais (`F2` idioma, `M` som,
+`Q`/`Esc` sair), pausa e reinício.]
+
+## Diagnóstico de console
+
+```bash
+./testes_debug.sh
+```
+
+Rode **dentro do VT afetado** e envie o `testes_debug.txt`. O script não
+instala nada e restaura o console ao final.
+
+## Testes e portões
+
+```bash
+cargo fmt --check
+cargo clippy --workspace --all-targets -- -D warnings
+cargo test
+cargo build --release
+```
+
+## Limitações
+
+- `--backend auto` usa TUI; o framebuffer é sempre explícito.
+- Sem DRM/KMS na primeira versão; hardware sem `/dev/fb0` não é suportado.
+- Sem vsync: tearing leve é aceitável.
+- Troca de VT durante a execução pode deixar resíduos; reinicie o app.
+
+## Licença
+
+Código MIT. Arte CC BY 4.0 (quando houver). Fontes OFL 1.1.

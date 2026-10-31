@@ -1,0 +1,50 @@
+# 03 — Design visual
+
+## 1. Direção
+
+- **Tema:** [PREENCHER]
+- **Sensação:** [PREENCHER]
+- **Referências:** [PREENCHER]
+- **Evitar:** [PREENCHER: neon, CRT, emojis etc.]
+
+## 2. Canvas e layout
+
+- Canvas lógico: 1344 × 756 (70% de 1920 × 1080).
+- Fb: fundo ocupa a tela inteira; composição escalada e centralizada.
+- TUI: breakpoints Wide / Compact / Minimal; mínimo 80 × 24.
+- Resize preserva todo o estado.
+
+## 3. Paleta (tokens semânticos)
+
+| Token | Truecolor | Uso |
+| --- | --- | --- |
+| `surface` | `#000000` | fundo |
+| `panel` | `#000000` | painéis |
+| `text_primary` | `#ffffff` | texto principal |
+| `text_secondary` | `#a0a0a0` | texto secundário |
+| `accent` | `#00e0e0` | destaque |
+| `danger` | `#ff5050` | erro |
+| `success` | `#00c850` | sucesso |
+
+- Variantes: truecolor, 256, 16, mono.
+- Contraste mínimo: texto principal ≥ 7:1; secundário ≥ 4,5:1.
+- Não dependa só de cor para indicar estado.
+
+## 4. Tipografia
+
+- Fontes: [PREENCHER] (OFL 1.1).
+- Tamanhos e `line_height`: [PREENCHER].
+- Verifique cobertura de glifos usados no catálogo.
+- Texto no fb com `fontdue::layout`; meça antes de centralizar.
+
+## 5. Imagens e animação
+
+- Tier: Kitty/Sixel/iTerm2 → half-blocks → textual.
+- Fallback obrigatório; o app nunca depende do protocolo de imagem.
+- `--no-animations` reduz movimento e encurta atrasos.
+- Durações e easing: [PREENCHER].
+
+## 6. Estados
+
+- Normal, foco, selecionado, pressionado, desabilitado, erro, sucesso.
+- Pausa e resultado têm layout próprio documentado.

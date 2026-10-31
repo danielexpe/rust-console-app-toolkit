@@ -1,0 +1,34 @@
+# Third-party notices
+
+__APP__ includes third-party software and fonts. The full license texts ship
+with the sources and with the packages listed in `Cargo.lock`.
+
+## Rust crates
+
+| Crate | License |
+| --- | --- |
+| `clap` | MIT OR Apache-2.0 |
+| `crossterm` | MIT |
+| `fontdue` | MIT OR Apache-2.0 OR Zlib |
+| `libc` | MIT OR Apache-2.0 |
+| `libloading` | ISC |
+| `ratatui` | MIT |
+| `thiserror` | MIT OR Apache-2.0 |
+| `tiny-skia` | BSD-3-Clause |
+
+Build-time crates in `xtask`:
+
+| Crate | License |
+| --- | --- |
+| [PREENCHER] | [PREENCHER] |
+
+## Fonts
+
+| Font | License | License file |
+| --- | --- | --- |
+| [PREENCHER] | OFL 1.1 | `assets/fonts/OFL-*.txt` |
+
+## Assets
+
+Original artwork is licensed under CC BY 4.0; see `LICENSE-ART`. Third-party
+assets must record their license and attribution here before being embedded.

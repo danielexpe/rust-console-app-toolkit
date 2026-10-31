@@ -1,0 +1,71 @@
+use std::path::PathBuf;
+use std::process::ExitCode;
+
+use clap::{Parser, ValueEnum};
+
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, ValueEnum)]
+enum Backend {
+    #[default]
+    Auto,
+    Tui,
+    Fb,
+}
+
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, ValueEnum)]
+enum ColorMode {
+    #[default]
+    Auto,
+    Truecolor,
+    #[value(name = "256")]
+    Color256,
+    #[value(name = "16")]
+    Color16,
+    Never,
+}
+
+#[derive(Debug, Parser)]
+#[command(name = "__BIN__", version, about = "__DESCRIPTION__")]
+#[allow(dead_code)]
+struct Cli {
+    /// Initial UI language.
+    #[arg(long, default_value = "pt")]
+    lang: String,
+
+    /// Video backend. `auto` never selects the framebuffer.
+    #[arg(long, value_enum, default_value = "auto")]
+    backend: Backend,
+
+    /// Framebuffer device path.
+    #[arg(long, value_name = "PATH", default_value = "/dev/fb0")]
+    fb_device: PathBuf,
+
+    /// Deterministic RNG seed.
+    #[arg(long)]
+    seed: Option<u64>,
+
+    /// Color mode. NO_COLOR always wins.
+    #[arg(long, value_enum, default_value = "auto")]
+    color: ColorMode,
+
+    /// Disable animations.
+    #[arg(long)]
+    no_animations: bool,
+
+    /// Start muted.
+    #[arg(long)]
+    no_audio: bool,
+
+    /// Render a deterministic PNG and exit without using fb, tty or audio.
+    #[arg(long, value_name = "PATH")]
+    capture_frame: Option<PathBuf>,
+}
+
+fn main() -> ExitCode {
+    let cli = Cli::parse();
+    eprintln!(
+        "__BIN__: esqueleto criado (backend={:?}, lang={}, seed={:?}); \
+         implemente o domínio e os backends seguindo docs/ e AGENTS.md",
+        cli.backend, cli.lang, cli.seed
+    );
+    ExitCode::SUCCESS
+}

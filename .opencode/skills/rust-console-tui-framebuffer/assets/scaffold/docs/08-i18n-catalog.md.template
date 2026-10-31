@@ -1,0 +1,29 @@
+# 08 — Catálogo i18n
+
+## 1. Regras
+
+- Todo texto visível vem do catálogo; nada hardcoded na UI.
+- Idiomas iniciais: `pt` (padrão) e `en`.
+- `F2` alterna o idioma em todas as telas, inclusive pausa e resultado.
+- A marca pode permanecer no idioma original.
+- Teste que strings longas não estouram o layout.
+- Versão e status de som aparecem de forma consistente.
+
+## 2. Chaves
+
+| Chave | pt-BR | en | Limite |
+| --- | --- | --- | --- |
+| `app.title` | __APP__ | __APP__ | — |
+| `app.subtitle` | [PREENCHER] | [PREENCHER] | [PREENCHER] |
+| `menu.start` | [PREENCHER] | [PREENCHER] | [PREENCHER] |
+| `menu.quit` | [PREENCHER] | [PREENCHER] | [PREENCHER] |
+| `hud.language` | [PREENCHER] | [PREENCHER] | [PREENCHER] |
+| `hud.sound` | [PREENCHER] | [PREENCHER] | [PREENCHER] |
+| `common.back` | [PREENCHER] | [PREENCHER] | [PREENCHER] |
+| `common.confirm` | [PREENCHER] | [PREENCHER] | [PREENCHER] |
+
+## 3. Cobertura de glifos
+
+- Liste os caracteres especiais usados (acentos, setas, símbolos).
+- Teste que as fontes embutidas têm todos os glifos do catálogo.
+- Evite glifos exóticos sem verificar cobertura.

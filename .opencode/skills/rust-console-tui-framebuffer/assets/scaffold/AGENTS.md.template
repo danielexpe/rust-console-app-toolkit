@@ -1,0 +1,132 @@
+# AGENTS.md — Memória operacional do projeto
+
+> **Este arquivo é a memória persistente entre sessões de IA.**
+> Leia-o inteiro no início de cada sessão antes de qualquer alteração.
+> Atualize-o ao final de cada tarefa relevante.
+>
+> **Última atualização:** __YEAR__
+> **Status atual:** Fase 0 — especificação. Nenhum código de produção validado.
+> **Branch:** main
+> **Último commit:** —
+> **Remote:** —
+
+## 1. Retomada rápida
+
+1. Leia este arquivo inteiro.
+2. Rode `git status --short --branch` e `git log --oneline -5`.
+3. Leia `README.md`, `framework.md` e os docs da fase atual.
+4. Não sobrescreva trabalho existente; registre bloqueios em vez de inventar
+   progresso.
+5. Carregue a skill `rust-console-tui-framebuffer` antes de implementar.
+
+## 2. Status atual
+
+| Item | Estado |
+| --- | --- |
+| Fase 0 — Descoberta | em andamento |
+| Especificações | docs/01–08 a preencher |
+| Código | esqueleto criado; domínio ainda não implementado |
+| Testes | — |
+| Framebuffer | não iniciado |
+| Release | — |
+
+### Próxima tarefa recomendada
+
+Preencher `docs/01`–`08`, congelar decisões com o usuário e implementar a
+Fase 1 (fundação).
+
+## 3. Resumo do produto
+
+- **Nome:** __APP__
+- **Binário:** `__BIN__`
+- **Descrição:** __DESCRIPTION__
+- **Plataforma:** Linux console local
+- **Backends:** TUI (`ratatui`/`crossterm`) e fbdev (`/dev/fb0`)
+- **Licença:** código MIT; arte CC BY 4.0; fontes OFL 1.1
+
+## 4. Decisões congeladas (não reabrir sem o usuário)
+
+- [PREENCHER após a Fase 0: escopo, telas, regras, tema, idiomas, áudio,
+  persistência, hardware alvo.]
+
+## 5. Documentos e fontes de verdade
+
+| Documento | Autoridade |
+| --- | --- |
+| `README.md` | Guia do usuário |
+| `docs/01-product.md` | Regras, fluxos, aceite funcional |
+| `docs/02-technical-spec.md` | Arquitetura, crates, CLI, desempenho |
+| `docs/03-visual-design.md` | Paleta, tipografia, layout |
+| `docs/04-assets-and-licenses.md` | Pipeline, manifesto, licenças |
+| `docs/05-test-plan.md` | Testes e matriz manual |
+| `docs/06-roadmap.md` | Fases e critérios de saída |
+| `docs/07-decisions-and-risks.md` | ADRs, premissas, questões |
+| `docs/08-i18n-catalog.md` | Strings e limites |
+| `framework.md` | Template arquitetural e de processo |
+
+## 6. Pendências e questões abertas
+
+| ID | Pendência | Prazo | Observação |
+| --- | --- | --- | --- |
+| Q-001 | [PREENCHER] | Fase 0 | |
+
+## 7. Comandos e portões
+
+```bash
+cargo run
+cargo test
+UPDATE_SNAPSHOTS=1 cargo test
+cargo fmt --check
+cargo clippy --workspace --all-targets -- -D warnings
+cargo clippy --workspace --all-targets --no-default-features -- -D warnings
+cargo build --release
+cargo build --release --no-default-features
+cargo xtask assets --check
+```
+
+## 8. Regras de trabalho para o agente
+
+1. Leia este arquivo antes de agir.
+2. Não use rede em runtime; downloads exigem aprovação explícita.
+3. Não faça commit, push, amend ou PR sem pedido explícito.
+4. Não configure remote sem pedido.
+5. Não armazene segredos neste arquivo nem no repositório.
+6. Não reabra decisões congeladas; proponha um ADR.
+7. Mantenha o escopo da fase.
+8. Preserve terminal/console em saída, erro, pânico e sinais.
+9. Código/identificadores em inglês; UI nos idiomas do produto.
+10. Sem comentários desnecessários; siga o estilo existente.
+11. Teste antes de declarar concluído; rode os portões.
+12. Atualize este arquivo ao final de cada tarefa.
+13. Registre bloqueios em vez de inventar progresso.
+
+## 9. Protocolo de atualização deste arquivo
+
+Ao final de cada tarefa, atualize: data no topo, status, próxima tarefa,
+registro de atividades, pendências e decisões. Seja conciso; use checkboxes;
+registre hashes de commits e releases; não apague entradas antigas.
+
+## 10. Registro de atividades
+
+| Data | Atividade | Resultado | Arquivos |
+| --- | --- | --- | --- |
+| __YEAR__ | Projeto criado a partir do toolkit | Esqueleto e docs iniciais | `README.md`, `AGENTS.md`, `docs/`, `src/`, `Cargo.toml` |
+
+## 11. Fases
+
+| Fase | Estado | Próximo marco |
+| --- | --- | --- |
+| 0 — Planejamento | em andamento | Aprovação do usuário |
+| 1 — Fundação | pendente | Núcleo testado + TUI placeholder |
+| 2 — TUI funcional | pendente | Fluxo completo + snapshots |
+| 3 — Lógica rica | pendente | Invariantes e `--seed` |
+| 4 — Arte/som/i18n | pendente | Assets + áudio + acessibilidade |
+| 5 — Release desktop | pendente | Pacote validado |
+| 6 — Framebuffer | pendente | Console validado |
+| 7 — Backlog | pendente | Itens priorizados |
+
+## 12. Notas para a próxima sessão
+
+- Comece pela Fase 0: preencha os docs e congele o escopo.
+- Não implemente framebuffer antes da TUI funcional.
+- Use `testes_debug.sh` no VT antes de alterar código de fbdev.

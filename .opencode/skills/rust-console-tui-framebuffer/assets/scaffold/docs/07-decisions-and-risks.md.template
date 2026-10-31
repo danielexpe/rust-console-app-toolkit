@@ -1,0 +1,50 @@
+# 07 — Decisões, riscos e questões
+
+## ADRs
+
+### D-001 — Dois backends com um único estado
+
+- **Status:** aceita.
+- **Contexto:** o app precisa rodar em terminal e em console local.
+- **Decisão:** um `App` compartilhado e dois backends (`tui`, `fb`) que
+  consomem a mesma cena lógica.
+- **Consequências:** `core` e `state` ficam puros; `render/scene` é
+  compartilhado; cada backend tem seu próprio ciclo de vida e restauração.
+
+### D-002 — `--backend auto` prefere TUI
+
+- **Status:** aceita.
+- **Contexto:** detectar fbdev automaticamente é frágil (SSH, X/Wayland,
+  containers, `/dev/fb0` sem VT ativo).
+- **Decisão:** `auto` nunca escolhe fb; fb é explícito.
+- **Consequências:** o usuário do console precisa passar `--backend fb`.
+
+### D-003 — [PREENCHER]
+
+- **Status:** proposta.
+- **Contexto:** [PREENCHER]
+- **Decisão:** [PREENCHER]
+- **Consequências:** [PREENCHER]
+
+## Premissas
+
+- Linux x86_64 local; Rust stable, edição 2021, MSRV 1.88.
+- `/dev/fb0` disponível no console alvo.
+- Sem rede em runtime.
+- Assets e fontes embutidos.
+
+## Questões abertas
+
+| ID | Questão | Prazo | Estado |
+| --- | --- | --- | --- |
+| Q-001 | [PREENCHER] | Fase 0 | aberta |
+
+## Riscos
+
+| Risco | Impacto | Mitigação |
+| --- | --- | --- |
+| Console blanked/DPMS | tela invisível | `FBIOBLANK(FB_BLANK_UNBLANK)` após `KD_GRAPHICS` |
+| Driver anuncia ypan e não honra | frame não aparece | fallback para buffer visível |
+| Sem `/dev/fb0` no hardware | backend indisponível | erro acionável, código 3 |
+| `tty` = `/dev/pts/N` | diagnóstico falso negativo | validar VT antes de testar |
+| Texto serrilhado | qualidade visual | escala bilinear ou render no tamanho final |

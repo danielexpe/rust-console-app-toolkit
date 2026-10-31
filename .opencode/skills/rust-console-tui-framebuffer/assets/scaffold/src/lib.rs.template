@@ -1,0 +1,5 @@
+//! Domain and backends for __APP__.
+//!
+//! Suggested layout (create modules as each phase is implemented):
+//! `core/` (pure), `state/`, `app`, `render/`, `platform/`, `util/`.
+//! Keep `core/` free of UI, IO, time and randomness.

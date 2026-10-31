@@ -1,0 +1,43 @@
+# 04 — Assets e licenças
+
+## 1. Pipeline
+
+```text
+assets/src/        # originais editáveis (SVG etc.)
+assets/generated/  # derivados versionados (PNG)
+assets/fonts/      # TTF + licenças
+assets/manifest.toml
+```
+
+- `cargo xtask assets` gera derivados e manifesto.
+- `cargo xtask assets --check` é portão: falha se o derivado divergir.
+- Nunca editar PNG gerado à mão.
+- Embutir com `include_bytes!`; testar decode e execução copiada em `/tmp`.
+
+## 2. Inventário
+
+| Asset | Origem | Derivado | Uso | Licença |
+| --- | --- | --- | --- | --- |
+| [PREENCHER] | `assets/src/...` | `assets/generated/...` | [PREENCHER] | CC BY 4.0 |
+
+## 3. Fontes
+
+| Fonte | Arquivo | Licença |
+| --- | --- | --- |
+| [PREENCHER] | `assets/fonts/...ttf` | OFL 1.1 |
+
+Inclua o texto da licença no pacote.
+
+## 4. Licenças do projeto
+
+- Código: MIT (`LICENSE`).
+- Arte original: CC BY 4.0 (`LICENSE-ART`), com crédito em `CREDITS.md`.
+- Fontes: OFL 1.1.
+- `THIRD_PARTY_NOTICES.md` com todas as crates e licenças.
+
+## 5. Regras
+
+- Não embutir asset de terceiro sem licença compatível e crédito.
+- Toda dependência nova entra em `THIRD_PARTY_NOTICES.md` e no orçamento de
+  tamanho.
+- Releases públicas levam licenças e créditos.

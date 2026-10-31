@@ -1,0 +1,54 @@
+# 01 — Produto: __APP__
+
+> Preencha e congele na Fase 0. Este documento é a autoridade funcional.
+
+## 1. Visão
+
+- **Nome / marca:** __APP__
+- **Subtítulo:** [PREENCHER]
+- **Propósito / gênero:** [PREENCHER]
+- **Público:** [PREENCHER]
+- **Diferenciais:** [PREENCHER]
+
+## 2. Escopo
+
+### Premissas
+
+- Linux x86_64 local; Rust stable, edição 2021, MSRV 1.88.
+- TUI em terminal local; SSH é melhor esforço.
+- Console alvo com `/dev/fb0` (efifb, simpledrm, amdgpu, i915 etc.).
+- Offline em runtime; entrada por teclado; assets embutidos.
+- Áudio opcional, sintetizado em runtime.
+
+### Fora de escopo (v1)
+
+- Windows, macOS, Wayland/X11 nativos.
+- DRM/KMS, mouse/gamepad, multiplayer, contas, nuvem.
+- Persistência, salvo pedido explícito.
+
+## 3. Fluxos e telas
+
+| Tela | Objetivo | Entradas | Saídas |
+| --- | --- | --- | --- |
+| Home | [PREENCHER] | [PREENCHER] | [PREENCHER] |
+| [PREENCHER] | | | |
+
+## 4. Regras do domínio
+
+- [PREENCHER: regras, pontuação, limites, erros, empates, IA.]
+
+## 5. Controles
+
+| Tecla | Ação |
+| --- | --- |
+| Setas / WASD | Navegar |
+| Enter / Espaço | Confirmar |
+| Esc / Q | Voltar / sair |
+| F2 | Alternar idioma |
+| M | Alternar som |
+
+## 6. Critérios de aceite
+
+- [ ] [PREENCHER: fluxo completo jogável/utilizável em TUI]
+- [ ] [PREENCHER: idiomas e acessibilidade]
+- [ ] [PREENCHER: determinismo com `--seed`, se aplicável]

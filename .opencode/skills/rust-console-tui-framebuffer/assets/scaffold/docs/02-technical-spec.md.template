@@ -1,0 +1,98 @@
+# 02 — Especificação técnica
+
+## 1. Plataforma e toolchain
+
+- Linux x86_64; Rust stable, edição 2021, MSRV 1.88.
+- `cargo fmt`, `cargo clippy`, `cargo test`, `cargo xtask`.
+- Sem rede em runtime.
+
+## 2. Arquitetura em camadas
+
+```text
+core/ (puro) <- state/ <- app/ -> render/{scene,tui,fb} -> platform/fb
+                         \-> audio/, assets/, i18n/, capture/
+```
+
+Regras:
+
+- `core/` não conhece UI, IO, tempo, RNG global, áudio ou assets.
+- `state/` modela a sessão; depende de `core/`.
+- `app/` orquestra backend, áudio e relógio.
+- `render/scene.rs` é compartilhado; `tui.rs` usa `ratatui`; `fb.rs` usa
+  `tiny-skia`/`fontdue`.
+- `platform/` isola `unsafe`, ioctls, `mmap`, `termios` e sinais.
+
+## 3. Módulos previstos
+
+| Módulo | Responsabilidade |
+| --- | --- |
+| `cli.rs` | flags e enums de opções |
+| `input.rs` | `Action` + `map_key` |
+| `app.rs` | estado, transições, loop TUI/fb |
+| `core/` | domínio puro |
+| `state/` | sessão e telas |
+| `render/layout.rs` | breakpoints e geometria |
+| `render/scene.rs` | cena lógica compartilhada |
+| `render/tui.rs` | desenho `ratatui` |
+| `render/fb.rs` | canvas, escala, blend, telas fb |
+| `render/text.rs` | texto no fb (`fontdue`) |
+| `platform/fb.rs` | device, console, ioctls, mmap, sinais |
+| `audio.rs` | síntese + ALSA dinâmico |
+| `assets.rs` | `include_bytes!`, decode, cache |
+| `capture.rs` | PNG determinístico de QA |
+| `i18n/` | catálogo de strings |
+| `theme.rs` | tokens de cor |
+| `util/rng.rs` | RNG determinístico |
+| `util/tty.rs` | guardas de terminal |
+
+## 4. CLI
+
+```text
+__BIN__ [OPTIONS]
+
+  --lang <pt|en>
+  --backend <auto|tui|fb>
+  --fb-device <PATH>          padrão: /dev/fb0
+  --seed <u64>
+  --color <auto|truecolor|256|16|never>
+  --no-animations
+  --no-audio
+  --capture-frame <PATH>
+  -h, --help
+  -V, --version
+```
+
+Códigos de saída: `0` sucesso; `1` runtime/IO/captura; `2` CLI; `3` backend
+indisponível.
+
+## 5. Dependências
+
+| Área | Crate |
+| --- | --- |
+| CLI | `clap` (derive) |
+| TUI | `ratatui` + `crossterm` |
+| Raster | `tiny-skia` |
+| Texto fb | `fontdue` |
+| Sistema | `libc` |
+| Erros | `thiserror` |
+| Áudio | `libloading` (feature `audio`) |
+| Assets | `xtask` |
+
+`--no-default-features` deve compilar e testar.
+
+## 6. Desempenho
+
+| Métrica | Alvo |
+| --- | --- |
+| Startup até primeira tela | < 400 ms |
+| Frame de animação (fb 1080p) | ≤ 16 ms |
+| Frame ocioso | ≤ 33 ms |
+| RSS | < 120 MB |
+| Binário release | < 15 MB |
+
+## 7. Backends
+
+- `auto` → TUI; nunca fb espontaneamente.
+- `fb` explícito, exige VT local e permissão no grupo `video`.
+- Contrato: entrar com RAII, desenhar de `&App`, apresentar, ler eventos com
+  timeout, restaurar em todos os caminhos.
